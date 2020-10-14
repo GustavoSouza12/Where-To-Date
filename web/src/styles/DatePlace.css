@@ -1,0 +1,58 @@
+#page-map{
+    width: 100vw;
+    height: 100vh;
+
+    position: relative;
+    display: flex;
+    
+    text-align: center;
+}
+
+#page-map aside{
+    width: 440px;
+    background: linear-gradient(329.54deg,#c41010 0%, #f56f6f);
+    padding: 80px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+#page-map aside h2{
+    font-size: 48px;
+    font-weight: 800;
+    line-height: 42px;
+    margin-top: 40px;
+}
+#page-map aside p {
+    line-height: 28px;
+    margin-top: 24px;
+}
+#page-map aside footer {
+    display: flex;
+    flex-direction: column;
+
+    line-height: 24px;
+}
+#page-map aside footer strong{
+    font-weight: 800;
+}
+#page-map .create-dateplace{
+    position: absolute;
+    right: 40px;
+    bottom: 40px;
+    z-index: 100000;
+
+    width: 64px;
+    height: 64px;
+    background:#e63232;
+    border-radius: 20px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition: background-color 0.2s;
+}
+#page-map .create-dateplace:hover{
+    background:#cc1b1b;
+}
