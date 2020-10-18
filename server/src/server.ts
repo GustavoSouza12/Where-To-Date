@@ -1,16 +1,16 @@
-import express from 'express'
+import express, { request } from 'express'
+import path from 'path'
+import 'express-async-errors'
+import './database/connection'
+import cors from 'cors'
+import routes from './routes'
+import errorHandler from './errors/handler'
 
 const app = express()
+app.use(cors({}))
 app.use(express.json())
-//Rota
-//Recurso
-//Methods HTTP
-//Parameters
+app.use(routes)
+app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')))
 
-//Query: 
-
-app.get('/users', (req, res)=>{
-    
-   return res.json({"teste": "a"})
-})
+app.use(errorHandler)
 app.listen(3001)
