@@ -6,14 +6,13 @@ import { useHistory } from "react-router-dom";
 
 import {FiPlus } from "react-icons/fi";
 
-import mapMarkerImg from '../images/icon.svg';
-
 import '../styles/CreatePlace.css';
 import Sidebar from '../components/Sidebar'
+import IconLocation from '../images/LocationHearth.svg'
 import api from "../services/api";
 
 const happyMapIcon = L.icon({
-  iconUrl: mapMarkerImg,
+  iconUrl: IconLocation,
 
   iconSize: [58, 68],
   iconAnchor: [29, 68],
@@ -31,6 +30,8 @@ export default function CreateOrphanage() {
   const [open_on_weekends, setOpenOnWeekends] = useState(true)
   const [images, setImages] = useState<File[]>([])
   const [previewImages, setPreviewImages] = useState<string[]>([])
+  const [whatsapp, setWhatsapp] = useState('')
+
 
   function handleMapClick(event: LeafletMouseEvent) {
     const { lat, lng } = event.latlng
@@ -68,6 +69,7 @@ export default function CreateOrphanage() {
     data.append('longitude', String(longitude))
     data.append('howToArrive', howToArrive)
     data.append('open_on_weekends', String(open_on_weekends))
+    data.append('whatsapp', whatsapp)
     
     images.forEach(image => {
       data.append('images', image)
@@ -93,13 +95,13 @@ export default function CreateOrphanage() {
             <legend>Dados</legend>
 
             <Map 
-              center={[-27.2092052,-49.6401092]} 
+              center={[-23.6125655,-46.7672465]} 
               style={{ width: '100%', height: 280 }}
               zoom={15}
               onClick={handleMapClick}
             >
               <TileLayer 
-                url={`https://api.mapbox.com/styles/v1/mapbox/light-v10/tiles/256/{z}/{x}/{y}@2x?access_token=${REACT_TOKEN}`}
+                url={`https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v11/tiles/256/{z}/{x}/{y}@2x?access_token=${REACT_TOKEN}`}
               />
 
               {position.latitude != 0
@@ -120,6 +122,11 @@ export default function CreateOrphanage() {
             </div>
 
             <div className="input-block">
+              <label htmlFor="name">Número Whatsapp (com ddd)</label>
+              <input id="name" value={whatsapp} onChange={e => setWhatsapp(e.target.value)} />
+            </div>
+
+            <div className="input-block">
               <label htmlFor="images">Fotos</label>
 
               <div className="images-container">
@@ -129,7 +136,7 @@ export default function CreateOrphanage() {
                   )
                 })}
                 <label htmlFor="image[]" className="new-image">
-                  <FiPlus size={24} color="#15b6d6" />
+                  <FiPlus size={24} color="red" />
                 </label>
 
               </div>
@@ -144,6 +151,7 @@ export default function CreateOrphanage() {
               <label htmlFor="instructions">Como chegar</label>
               <textarea id="instructions" value={howToArrive} onChange={e => setHowToArrive(e.target.value)} />
             </div>
+
 
             <div className="input-block">
               <label htmlFor="open_on_weekends">Atende fim de semana</label>

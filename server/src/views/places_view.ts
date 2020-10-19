@@ -8,6 +8,7 @@ export default {
             latitude: place.latitude,
             longitude: place.longitude,
             about: place.about,
+            whatsapp: place.whatsapp,
             howToArrive: place.howToArrive,
             open_on_weekends: place.open_on_weekends,
             id: place.id,

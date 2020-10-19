@@ -11,24 +11,27 @@ import { FaGlobeAmericas } from 'react-icons/fa'
 
 import { Link } from 'react-router-dom'
 
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+AOS.init();
 
 const Landing = () => {
 
   return (
     <div id="page-landing">
-        <div className="content-wrapper">
-          <img className="page-logo" src={LogoImg} alt="Where to Date"/>
-          <main>
-            <h1>Encontre o melhor lugar para o seu <span className="orange">Date</span>!</h1>
+        <div className="content-wrapper" >
+          <img className="page-logo" src={LogoImg} alt="Where to Date" data-aos="fade-up" data-aos-duration="1500"/>
+          <main  data-aos="fade-in" data-aos-delay="1800">
+            <h1 >Encontre o melhor lugar para o seu <span className="orange">Date</span>!</h1>
             <p>Lugares incrivéis para um encontro <span className="orange">inesquecível</span> !!!</p>
           </main>
-          <img src={LandingImg} alt="" className="page-landing"/>
-          <div className="location">
+          <img  data-aos="fade-left" data-aos-delay="400" data-aos-duration="1000" src={LandingImg} alt="" className="page-landing"/>
+          <div  data-aos="fade-in" data-aos-delay="1800" data-aos-duration="500" className="location">
             <strong><GiModernCity size={26} color="rgba(255, 187, 0, 0.7)"/> Taboão da Serra <GiModernCity size={26} color="rgba(255, 187, 0, 0.7)"/></strong>
             <span><FaGlobeAmericas size={26} color="rgba(255, 187, 0, 0.7)"/> São Paulo - BR <FaGlobeAmericas size={26} color="rgba(255, 187, 0, 0.7)"/></span>
           </div>
 
-          <Link to="/app" className="enter-app">
+          <Link to="/app" className="enter-app" data-aos="fade-in" data-aos-delay="1800" data-aos-duration="500">
             <FiArrowRight size={26} color="rgba(0, 0, 0, 0.6)"/>
           </Link>
         </div>

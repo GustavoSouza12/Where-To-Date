@@ -6,7 +6,7 @@
 
 body{
     color: black;
-    background-color:#ebf2f5;
+    background: linear-gradient(to left,#c41010 20%, #f56f6f);
 }
 .orange{
     color: rgba(255, 187, 0, 0.7);

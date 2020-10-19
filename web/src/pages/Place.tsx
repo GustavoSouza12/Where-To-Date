@@ -1,19 +1,23 @@
 import React, { useEffect, useState } from "react";
 
-import { FaWhatsapp } from "react-icons/fa";
-import { FiClock, FiInfo} from "react-icons/fi";
+import { FaWhatsapp, FaStore } from "react-icons/fa";
+import { FiInfo} from "react-icons/fi";
 import { Map, Marker, TileLayer } from "react-leaflet";
 import { useParams } from 'react-router-dom';
 import L from 'leaflet';
+import IconLocation from '../images/LocationHearth.svg'
 
-import mapMarkerImg from '../images/icon.svg';
 
 import '../styles/Place.css';
 import Sidebar from '../components/Sidebar'
 import api from "../services/api";
 
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+AOS.init();
+
 const happyMapIcon = L.icon({
-  iconUrl: mapMarkerImg,
+  iconUrl: IconLocation,
 
   iconSize: [58, 68],
   iconAnchor: [29, 68],
@@ -25,8 +29,10 @@ interface Place {
   longitude: number,
   name: string,
   about: string,
+  whatsapp: string,
   howToArrive: string,
-  open_on_weekends: string
+  open_on_weekends: string,
+  
   images: Array<{
     id: number
     url: string
@@ -41,6 +47,8 @@ export default function Orphanage() {
   const params = useParams<PlaceParams>()
 
   const [place, setPlace] = useState<Place>()
+  console.log(place)
+
   const [activeImageIndex, setActiveImageIndex] = useState(0)
 
   useEffect(() => {
@@ -54,11 +62,11 @@ export default function Orphanage() {
   }
 
   return (
-    <div id="page-orphanage">
+    <div id="page-place">
       <Sidebar/>
 
       <main>
-        <div className="orphanage-details">
+        <div className="place-details" data-aos="fade-up" data-aos-duration="1000">
           <img src={place.images[activeImageIndex].url} alt={place.name} />
 
           <div className="images">
@@ -78,8 +86,8 @@ export default function Orphanage() {
             })}
           </div>
           
-          <div className="orphanage-details-content">
-            <h1>{place.name}</h1>
+          <div className="place-details-content">
+            <h1><FaStore/> {place.name}</h1>
             <p>{place.about}</p>
 
             <div className="map-container">
@@ -94,7 +102,7 @@ export default function Orphanage() {
                 doubleClickZoom={false}
               >
                 <TileLayer 
-                  url={`https://api.mapbox.com/styles/v1/mapbox/light-v10/tiles/256/{z}/{x}/{y}@2x?access_token=${REACT_TOKEN}`}
+                  url={`https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v11/tiles/256/{z}/{x}/{y}@2x?access_token=${REACT_TOKEN}`}
                 />
                 <Marker interactive={false} icon={happyMapIcon} position={[place.latitude, place.longitude]} />
               </Map>
@@ -108,17 +116,31 @@ export default function Orphanage() {
 
             <h2>Como chegar</h2>
             <p>{place.howToArrive}</p>
-
-            <div className="open-on-weekends">
-              <FiInfo size={32} color="#39CC83" />
-              Atendemos <br />
-              fim de semana
-            </div>
+          
+            <div className="open-details">
+              { place.open_on_weekends ? (
+                <div className="open-on-weekends">
+                  <div><FiInfo size={32} color="#37C77F" /></div>
+                  <div>
+                    Atendemos <br />
+                    fim de semana
+                  </div>
+                </div>
+              ):(
+                <div className="open-on-weekends-dont">
+                  <div><FiInfo size={32} color="#da442a" /></div>
+                  <div>Não atendemos <br />
+                  fim de semana
+                  </div>
+                </div>
+              )}
+            </div>  
+            {console.log(place.open_on_weekends)}
                
-            <button type="button" className="contact-button">
+            <a href={`https://api.whatsapp.com/send?phone=55${place.whatsapp}`} target="_blank" type="button" className="contact-button">
               <FaWhatsapp size={20} color="#FFF" />
               Entrar em contato
-            </button>
+            </a>
           </div>
         </div>
       </main>

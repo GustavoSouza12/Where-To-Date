@@ -7,14 +7,20 @@ import './../styles/DatePlace.css'
 import 'leaflet/dist/leaflet.css'
 import { HiLocationMarker } from 'react-icons/hi'
 import Leaflet from 'leaflet'
-import IconLocation from '../images/icon.svg'
+import IconLocation from '../images/LocationHearth.svg'
+
+import { GiModernCity } from 'react-icons/gi'
+import { FaGlobeAmericas } from 'react-icons/fa'
 import api from '../services/api'
 
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+AOS.init();
 
 const mapIcon = Leaflet.icon({
     iconUrl: IconLocation,
 
-    iconSize: [58,68],
+    iconSize: [80,150],
     iconAnchor: [29, 68],
     popupAnchor: [170, 2]
 })
@@ -33,12 +39,13 @@ const OrphanagesMap = () => {
     useEffect(() => {
         api.get('placesToDate').then(response =>{
              setPlaces(response.data)
+             console.log(response.data)
         })          
     }, [])
-const REACT_TOKEN = "pk.eyJ1IjoiZ3VzdGF2b3NvdXphMTIiLCJhIjoiY2tnOW13NTdnMDJjdTJwbnkzeWF2eXM4bSJ9.bSDbva2eQ5em_TTlOQ66Eg"
-    return(
+        const REACT_TOKEN = "pk.eyJ1IjoiZ3VzdGF2b3NvdXphMTIiLCJhIjoiY2tnOW13NTdnMDJjdTJwbnkzeWF2eXM4bSJ9.bSDbva2eQ5em_TTlOQ66Eg"
+    return (
         <div id="page-map">
-            <aside>
+            <aside data-aos="zoom-in">
                 <header>
                     <HiLocationMarker size={60} color={'rgba(255, 187, 0, 0.7)'}/>
                     <h2>Escolha um lugar para seu <span className="orange">Date</span>!</h2>
@@ -46,8 +53,8 @@ const REACT_TOKEN = "pk.eyJ1IjoiZ3VzdGF2b3NvdXphMTIiLCJhIjoiY2tnOW13NTdnMDJjdTJw
                 </header>
 
                 <footer>
-                    <strong>Taboão da Serra</strong>
-                    <span>São Paulo - BR</span>
+                    <strong><GiModernCity size={26} color="rgba(255, 187, 0, 0.7)"/> Taboão da Serra <GiModernCity size={26} color="rgba(255, 187, 0, 0.7)"/></strong>
+                    <span><FaGlobeAmericas size={26} color="rgba(255, 187, 0, 0.7)"/> São Paulo - BR <FaGlobeAmericas size={26} color="rgba(255, 187, 0, 0.7)"/></span>
                 </footer>
             </aside>
 
@@ -55,6 +62,7 @@ const REACT_TOKEN = "pk.eyJ1IjoiZ3VzdGF2b3NvdXphMTIiLCJhIjoiY2tnOW13NTdnMDJjdTJw
                     center={[-23.6125655,-46.7672465]}
                     zoom={15}
                     style={{ width: '100%', height: '100%'}}
+                    data-aos="zoom-in"
                 >
                     {/*<TileLayer url="https://a.tile.openstreetmap.org/{z}/{x}/{y}.png"/>*/}
 

@@ -33,7 +33,8 @@ export default {
             longitude,
             about,
             howToArrive,
-            open_on_weekends
+            open_on_weekends,
+            whatsapp
         } = request.body
        
         const placesRepository = getRepository(PlacesToDate)
@@ -48,9 +49,10 @@ export default {
             name,
             latitude,
             longitude,
+            whatsapp,
             about,
             howToArrive,
-            open_on_weekends: open_on_weekends === true,
+            open_on_weekends: open_on_weekends === 'true',
             images
         }
 
@@ -61,6 +63,7 @@ export default {
             about: Yup.string().required().max(300),
             howToArrive: Yup.string().required(),
             open_on_weekends: Yup.boolean().required(),
+            whatsapp: Yup.string().required(),
             images: 
                 Yup.array(Yup.object().shape({
                     path: Yup.string().required()

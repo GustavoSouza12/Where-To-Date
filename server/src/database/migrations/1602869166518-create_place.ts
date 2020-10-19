@@ -46,6 +46,10 @@ export class createPlacesToDate1602789222181 implements MigrationInterface {
                  type: 'boolean',
                  default: true,
                  
+             },
+             {
+                name: 'whatsapp',
+                type: 'text'
              }
             ]    
         }))

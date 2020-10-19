@@ -19,6 +19,9 @@ export default class PlacesToDate {
     about: string
 
     @Column()
+    whatsapp: string
+
+    @Column()
     howToArrive: string
 
     @Column()

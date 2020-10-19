@@ -4,7 +4,7 @@ import { ValidationError } from 'yup'
 interface ValidationErrors{
    [key: string]: string[]
 }
-const errorHandler: ErrorRequestHandler = (error, request, repsonse, next ) => {
+const errorHandler: ErrorRequestHandler = (error, request, response, next ) => {
     if (error instanceof ValidationError) {
         let errors: ValidationErrors = {}
 
