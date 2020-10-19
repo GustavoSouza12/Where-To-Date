@@ -28,7 +28,7 @@ const Landing = () => {
             <span><FaGlobeAmericas size={26} color="rgba(255, 187, 0, 0.7)"/> São Paulo - BR <FaGlobeAmericas size={26} color="rgba(255, 187, 0, 0.7)"/></span>
           </div>
 
-          <Link to="/teste" className="enter-app">
+          <Link to="/app" className="enter-app">
             <FiArrowRight size={26} color="rgba(0, 0, 0, 0.6)"/>
           </Link>
         </div>
